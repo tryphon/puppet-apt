@@ -1,4 +1,5 @@
 class apt {
+
   Package {
     require => Exec["apt-get_update"]
   }
@@ -15,6 +16,15 @@ class apt {
 
   file { "/etc/apt/sources.list":
     source => "puppet:///apt/sources.list"
+  }
+
+  file { "/usr/local/sbin/apt-upgrade":
+    source => "puppet:///apt/apt-upgrade"
+  }
+
+  line { "sudo-apt-upgrade-adm":
+    file => "/etc/sudoers",
+    line => "%adm	ALL=(ALL) NOPASSWD: /usr/local/sbin/apt-upgrade"
   }
 
   concatenated_file { "/etc/apt/preferences":
