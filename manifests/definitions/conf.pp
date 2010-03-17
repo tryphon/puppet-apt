@@ -12,4 +12,10 @@ define apt::conf($ensure, $content = false, $source = false) {
       source => $source,
     }
   }
+
+  if $ensure == "absent" {
+    file {"/etc/apt/apt.conf.d/${name}":
+      ensure => $ensure
+    }
+  }
 }

@@ -37,5 +37,9 @@ class apt {
       ensure => present,
       content => "Acquire::http { Proxy \"${apt_proxy_url}\"; };"
     }
+  } else {
+    apt::conf { "02proxy":
+      ensure => absent
+    }
   }
 }
