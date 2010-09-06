@@ -32,6 +32,11 @@ class apt {
     before  => Exec["apt-get_update"]
   }
 
+  apt::conf { "02recommended-suggested":
+    ensure => present,
+    content => "APT::Install-Recommends \"0\";\nAPT::Install-Suggests \"0\";"
+  }
+
   if ($apt_proxy_url) {
     apt::conf { "02proxy":
       ensure => present,
