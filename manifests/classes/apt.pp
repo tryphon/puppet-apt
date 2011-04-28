@@ -15,7 +15,7 @@ class apt {
   }
 
   file { "/etc/apt/sources.list":
-    source => "puppet:///apt/sources.list"
+    content => "deb http://ftp.fr.debian.org/debian/ $lsbdistcodename main contrib non-free\ndeb http://security.debian.org/ $lsbdistcodename/updates main contrib non-free\n"
   }
 
   file { "/usr/local/sbin/apt-upgrade":

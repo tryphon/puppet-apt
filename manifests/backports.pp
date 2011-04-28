@@ -1,6 +1,8 @@
 class apt::backports {
-  apt::sources_list { lenny-backports:
-    content => "deb http://backports.debian.org/debian-backports lenny-backports main contrib non-free"
+  if $lsbdistcodename == "lenny" {
+    apt::sources_list { lenny-backports:
+      content => "deb http://backports.debian.org/debian-backports lenny-backports main contrib non-free"
+    }
   }
 
   apt::key_local { backports:

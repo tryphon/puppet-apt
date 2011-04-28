@@ -1,7 +1,7 @@
 class apt::multimedia {
 
   apt::sources_list { debian-multimedia:
-    content => "deb http://www.debian-multimedia.org stable main"
+    content => "deb http://www.debian-multimedia.org $lsbdistcodename main"
   }
 
   apt::key_local { multimedia:
