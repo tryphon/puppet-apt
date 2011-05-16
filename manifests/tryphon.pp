@@ -4,15 +4,16 @@ class apt::tryphon {
     '' => "debian.tryphon.eu"
   } 
 
-  # TODO Merge when squeeze-backports will be created
-  if $lsbdistcodename == "lenny" {
-    apt::sources_list { tryphon:
-      content => "deb http://$real_apt_tryphon_host lenny main contrib\ndeb http://$real_apt_tryphon_host lenny-backports main contrib\n"
+  case $lsbdistcodename {
+    squeeze: {
+      apt::sources_list { tryphon:
+        content => "deb http://$real_apt_tryphon_host squeeze main contrib\n"
+      }
     }
-  } 
-  if $lsbdistcodename == "squeeze" {
-    apt::sources_list { tryphon:
-      content => "deb http://$real_apt_tryphon_host squeeze main contrib\n"
+    default: {
+      apt::sources_list { tryphon:
+        content => "deb http://$real_apt_tryphon_host lenny main contrib\ndeb http://$real_apt_tryphon_host lenny-backports main contrib\n"
+      }
     }
   }
 
