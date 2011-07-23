@@ -1,5 +1,5 @@
 define apt::preferences($ensure="present", $package, $pin, $priority) {
-  if ($lsbdistcodename != 'squeeze') {
+  if $debian::lenny {       
     concatenated_file_part { $name:
       ensure  => $ensure,
       dir    => "/etc/apt/preferences.d",

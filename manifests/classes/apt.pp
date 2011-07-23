@@ -28,9 +28,11 @@ class apt {
     line => "%adm	ALL=(ALL) NOPASSWD: /usr/local/sbin/apt-upgrade"
   }
 
-  concatenated_file { "/etc/apt/preferences":
-    dir => "/etc/apt/preferences.d",
-    before  => Exec["apt-get_update"]
+  if $debian::lenny {       
+    concatenated_file { "/etc/apt/preferences":
+      dir => "/etc/apt/preferences.d",
+      before  => Exec["apt-get_update"]
+    }
   }
 
   apt::conf { "02recommended-suggested":
