@@ -1,4 +1,5 @@
 class apt::backports {
+<<<<<<< HEAD
   include debian
 
   if $debian::lenny {

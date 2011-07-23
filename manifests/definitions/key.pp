@@ -1,11 +1,27 @@
 define apt::key($ensure = present, $source) {
   case $ensure {
     present: {
-      exec { "/usr/bin/wget -O - '$source' | /usr/bin/apt-key add -":
-        unless => "apt-key list | grep -Fqe '${name}'",
-        path   => "/bin:/usr/bin",
-        before => Exec["apt-get_update"],
-        notify => Exec["apt-get_update"],
+      if $source =~ /^http:/ {
+        exec { "/usr/bin/wget -O - '$source' | /usr/bin/apt-key add -":
+          unless => "apt-key list | grep -Fqe '${name}'",
+          path   => "/bin:/usr/bin",
+          before => Exec["apt-get_update"],
+          notify => Exec["apt-get_update"],
+        }
+      } else {
+        file { "/etc/apt/keys": 
+          ensure => directory 
+        }
+        file { "/etc/apt/keys/$name": 
+          source => $source
+        }
+        exec { "/usr/bin/apt-key add /etc/apt/keys/$name":
+          unless => "apt-key list | grep -Fqe '${name}'",
+          path   => "/bin:/usr/bin",
+          require => File["/etc/apt/keys/$name"],
+          before => Exec["apt-get_update"],
+          notify => Exec["apt-get_update"],
+        }
       }
     }
     
