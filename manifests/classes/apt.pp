@@ -1,4 +1,5 @@
 class apt {
+  include debian
 
   Package {
     require => Exec["apt-get_update"]
@@ -15,7 +16,7 @@ class apt {
   }
 
   file { "/etc/apt/sources.list":
-    content => "deb http://ftp.fr.debian.org/debian/ $lsbdistcodename main contrib non-free\ndeb http://security.debian.org/ $lsbdistcodename/updates main contrib non-free\n"
+    content => "deb http://ftp.fr.debian.org/debian/ $debian::release main contrib non-free\ndeb http://security.debian.org/ $debian::release/updates main contrib non-free\n"
   }
 
   file { "/usr/local/sbin/apt-upgrade":

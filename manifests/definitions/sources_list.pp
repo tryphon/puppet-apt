@@ -7,15 +7,17 @@ define apt::sources_list (
     file {"/etc/apt/sources.list.d/${name}.list":
       ensure => $ensure,
       source => $source,
-      before => Exec["apt-get_update"],
-      notify => Exec["apt-get_update"],
+      notify => Exec["apt-get-update-for-source-${name}"]
     }
   } else {
     file {"/etc/apt/sources.list.d/${name}.list":
       ensure  => $ensure,
       content => $content,
-      before  => Exec["apt-get_update"],
-      notify  => Exec["apt-get_update"],
+      notify => Exec["apt-get-update-for-source-${name}"]
     }
+  }
+  exec { "apt-get-update-for-source-${name}":
+    command => "apt-get update",
+    refreshonly => true
   }
 }

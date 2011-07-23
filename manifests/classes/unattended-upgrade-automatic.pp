@@ -6,6 +6,6 @@ class apt::unattended-upgrade::automatic inherits apt::unattended-upgrade {
 
   apt::conf{"50unattended-upgrades":
     ensure => present,
-    source => "puppet:///apt/unattended-upgrades.${lsbdistcodename}",
+    source => "puppet:///apt/unattended-upgrades.${debian::release}",
   }
 }
