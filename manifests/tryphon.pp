@@ -9,13 +9,15 @@ class apt::tryphon {
   # TODO Merge when squeeze-backports will be created
   if $debian::lenny {
     apt::sources_list { tryphon:
-      content => "deb http://$real_apt_tryphon_host lenny main contrib\ndeb http://$real_apt_tryphon_host lenny-backports main contrib\n"
+      content => "deb http://$real_apt_tryphon_host lenny main contrib\ndeb http://$real_apt_tryphon_host lenny-backports main contrib\n",
+      require => Apt::Key["C6ADBBD5"]
     }
   } 
 
   if $debian::squeeze {
     apt::sources_list { tryphon:
-      content => "deb http://$real_apt_tryphon_host squeeze main contrib\n"
+      content => "deb http://$real_apt_tryphon_host squeeze main contrib\n",
+      require => Apt::Key["C6ADBBD5"]
     }
   }
 
