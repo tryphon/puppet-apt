@@ -2,7 +2,9 @@ define apt::key($ensure = present, $source) {
   case $ensure {
     present: {
       if $source =~ /^http:/ {
-        include wget
+        if ! defined(Package[wget]) {
+          package { wget: }
+        }
         exec { "/usr/bin/wget -O - '$source' | /usr/bin/apt-key add -":
           unless => "apt-key list | grep -Fqe '${name}'",
           path   => "/bin:/usr/bin",
