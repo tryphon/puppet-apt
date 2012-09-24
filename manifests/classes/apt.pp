@@ -15,8 +15,14 @@ class apt {
     refreshonly => true,
   }
 
-  file { "/etc/apt/sources.list":
-    content => "deb http://ftp.fr.debian.org/debian/ $debian::release main contrib non-free\ndeb http://security.debian.org/ $debian::release/updates main contrib non-free\n"
+  if $debian::lenny {
+    file { "/etc/apt/sources.list":
+      content => "deb http://archive.debian.org/debian/ lenny main contrib non-free"
+    }
+  } else {
+    file { "/etc/apt/sources.list":
+      content => "deb http://ftp.fr.debian.org/debian/ $debian::release main contrib non-free\ndeb http://security.debian.org/ $debian::release/updates main contrib non-free\n"
+    }
   }
 
   file { "/usr/local/sbin/apt-upgrade":
