@@ -1,7 +1,7 @@
 class apt::multimedia {
 
   apt::sources_list { debian-multimedia:
-    content => "deb http://www.debian-multimedia.org $debian::release main"
+    content => "deb http://www.deb-multimedia.org $debian::release main"
   }
 
   apt::key_local { multimedia:
