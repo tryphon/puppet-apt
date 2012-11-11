@@ -12,11 +12,9 @@ class apt::tryphon {
       content => "deb http://$real_apt_tryphon_host lenny main contrib\ndeb http://$real_apt_tryphon_host lenny-backports main contrib\n",
       require => Apt::Key["C6ADBBD5"]
     }
-  } 
-
-  if $debian::squeeze {
+  } else {
     apt::sources_list { tryphon:
-      content => "deb http://$real_apt_tryphon_host squeeze main contrib\n",
+      content => "deb http://$real_apt_tryphon_host ${debian::release} main contrib\n",
       require => Apt::Key["C6ADBBD5"]
     }
   }
