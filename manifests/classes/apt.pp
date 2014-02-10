@@ -29,12 +29,12 @@ class apt {
     source => "puppet:///apt/apt-upgrade"
   }
 
-  line { "sudo-apt-upgrade-adm":
-    file => "/etc/sudoers",
+  include sudo
+  sudo::user_line { "apt-upgrade-adm":
     line => "%adm	ALL=(ALL) NOPASSWD: /usr/local/sbin/apt-upgrade"
   }
 
-  if $debian::lenny {       
+  if $debian::lenny {
     concatenated_file { "/etc/apt/preferences":
       dir => "/etc/apt/preferences.d",
       before  => Exec["apt-get_update"]
