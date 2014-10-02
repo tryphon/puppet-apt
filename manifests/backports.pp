@@ -5,11 +5,17 @@ class apt::backports {
     apt::sources_list { lenny-backports:
       content => "deb http://archive.debian.org/debian-backports lenny-backports main contrib non-free"
     }
-  } 
+  }
 
   if $debian::squeeze {
     apt::sources_list { squeeze-backports:
       content => "deb http://backports.debian.org/debian-backports squeeze-backports main contrib non-free"
+    }
+  }
+
+  if $debian::wheezy {
+    apt::sources_list { wheezy-backports:
+      content => "deb http://backports.debian.org/debian-backports wheezy-backports main contrib non-free"
     }
   }
 
