@@ -15,7 +15,7 @@ class apt::backports {
 
   if $debian::wheezy {
     apt::sources_list { wheezy-backports:
-      content => "deb http://backports.debian.org/debian-backports wheezy-backports main contrib non-free"
+      content => "deb http://http.debian.net/debian wheezy-backports main contrib non-free"
     }
   }
 
