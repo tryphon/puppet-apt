@@ -5,7 +5,7 @@ class apt::multimedia {
   }
 
   apt::key_local { multimedia:
-    key => "1F41B907",
+    key => "65558117",
     source => "puppet:///apt/multimedia.key"
   }
 
