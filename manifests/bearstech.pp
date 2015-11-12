@@ -1,4 +1,4 @@
-class bearstech::apt {
+class apt::bearstech {
   apt::sources_list { "bearstech":
     content => "deb http://deb.bearstech.com/debian ${debian::release}-bearstech main",
     require => Apt::Key_local[bearsteach]
