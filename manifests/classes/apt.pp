@@ -7,7 +7,7 @@ class apt {
 
   apt::conf {"10periodic":
     ensure => present,
-    source => "puppet:///apt/10periodic",
+    source => "puppet:///modules/apt/10periodic",
   }
 
   exec { "apt-get_update":
@@ -26,7 +26,7 @@ class apt {
   }
 
   file { "/usr/local/sbin/apt-upgrade":
-    source => "puppet:///apt/apt-upgrade"
+    source => "puppet:///modules/apt/apt-upgrade"
   }
 
   include sudo

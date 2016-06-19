@@ -21,6 +21,6 @@ class apt::backports {
 
   apt::key_local { backports:
     key => "16BA136C",
-    source => "puppet:///apt/backports.key"
+    source => "puppet:///modules/apt/backports.key"
   }
 }

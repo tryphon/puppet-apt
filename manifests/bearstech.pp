@@ -5,6 +5,6 @@ class apt::bearstech {
   }
   apt::key_local { 'bearstech':
     key => '90158EE0',
-    source => 'puppet:///apt/bearstech.key'
+    source => 'puppet:///modules/apt/bearstech.key'
   }
 }
