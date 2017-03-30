@@ -19,6 +19,12 @@ class apt::backports {
     }
   }
 
+  if $debian::jessie {
+    apt::sources_list { jessie-backports:
+      content => "deb http://http.debian.net/debian jessie-backports main contrib non-free"
+    }
+  }
+
   apt::key_local { backports:
     key => "16BA136C",
     source => "puppet:///modules/apt/backports.key"

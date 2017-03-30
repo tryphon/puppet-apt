@@ -8,8 +8,8 @@ define apt::key($ensure = present, $source) {
         exec { "/usr/bin/wget -O - '$source' | /usr/bin/apt-key add -":
           unless => "apt-key list | grep -Fqe '${name}'",
           path   => "/bin:/usr/bin",
-          before => Exec["apt-get_update"],
-          notify => Exec["apt-get_update"],
+          before => Exec["apt_get_update"],
+          notify => Exec["apt_get_update"],
           require => Package[wget]
         }
       } else {
@@ -23,8 +23,8 @@ define apt::key($ensure = present, $source) {
           unless => "apt-key list | grep -Fqe '${name}'",
           path   => "/bin:/usr/bin",
           require => File["/etc/apt/keys/$name"],
-          before => Exec["apt-get_update"],
-          notify => Exec["apt-get_update"],
+          before => Exec["apt_get_update"],
+          notify => Exec["apt_get_update"],
         }
       }
     }

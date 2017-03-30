@@ -8,8 +8,8 @@ define apt::key_local($key = $name, $ensure = present, $source) {
       exec { "/usr/bin/apt-key add /etc/apt/$name.key":
         unless => "apt-key list | grep -Fqe '${key}'",
         path   => "/bin:/usr/bin",
-        before => Exec["apt-get_update"],
-        notify => Exec["apt-get_update"],
+        before => Exec["apt_get_update"],
+        notify => Exec["apt_get_update"],
         require => File["/etc/apt/$name.key"]
       }
     }

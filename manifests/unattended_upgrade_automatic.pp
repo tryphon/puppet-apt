@@ -1,4 +1,4 @@
-class apt::unattended-upgrade::automatic inherits apt::unattended-upgrade {
+class apt::unattended_upgrade_automatic inherits apt::unattendedr_upgrade {
   apt::conf{"99unattended-upgrade":
     ensure  => present,
     content => "APT::Periodic::Unattended-Upgrade \"1\";\n",
